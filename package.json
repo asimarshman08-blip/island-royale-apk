@@ -1,11 +1,12 @@
 {
   "name": "island-royale",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Island Royale battle royale game packaged as an Android app",
+  "description": "Island Royale 3D battle royale game packaged as an Android app",
   "dependencies": {
     "@capacitor/android": "^6.2.0",
     "@capacitor/cli": "^6.2.0",
-    "@capacitor/core": "^6.2.0"
+    "@capacitor/core": "^6.2.0",
+    "three": "0.149.0"
   }
 }
