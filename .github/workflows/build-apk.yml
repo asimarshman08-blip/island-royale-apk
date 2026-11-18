@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,8 +41,19 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
 
-      - name: Upload APK
+      - name: Rename APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk island-royale.apk
+
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: island-royale-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: island-royale.apk
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Island Royale v1.0.${{ github.run_number }}
+          files: island-royale.apk
+          make_latest: true
